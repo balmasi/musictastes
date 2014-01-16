@@ -12,7 +12,7 @@ app.controller('MainCtrl', function ($scope) {
 });
 
 
-app  .controller('authenticationCtrl', [
+app.controller('authenticationCtrl', [
     '$scope',
     '$timeout',
     'Facebook',
@@ -123,4 +123,4 @@ app  .controller('authenticationCtrl', [
       
       
     }
-  ])
+  ]);
