@@ -23,8 +23,10 @@ app.controller('authenticationCtrl', [
       // Define user empty data :/
       $scope.user = {};
       $scope.top10 = [null,null,null,null,null,null,null,null,null,null];
+      $scope.percentDone = 0;
       // Defining user logged status
       $scope.logged = false;
+      $scope.top10Calculated = false;
       
       // And some fancy flags to display messages upon user status change
       $scope.byebye = false;
@@ -49,7 +51,6 @@ app.controller('authenticationCtrl', [
        */
        $scope.IntentLogin = function() {
         Facebook.getLoginStatus(function(response) {
-          console.log("response is:" , response)
           if (response.status == 'connected') {
             $scope.logged = true;
             $scope.authToken = response.authResponse.accessToken
@@ -104,7 +105,6 @@ app.controller('authenticationCtrl', [
       };
       
 
-
       $scope.getMyLikes = function () {
         Facebook.api('/me/music?limit=200', function(response){
           $scope.$apply(function(){
@@ -114,6 +114,7 @@ app.controller('authenticationCtrl', [
             for (var i=0;i<data.length; i++){
               var curArtist = data[i];
               $scope.myMusic[curArtist.id] = {name: curArtist.name}
+
             }
 
             $scope.myMusicFetched = true;
@@ -162,6 +163,7 @@ app.controller('authenticationCtrl', [
           $scope.$apply(function(){
             $scope.friends = {};
             // Get all my friends in an id -> name hash
+            $scope.numFriends = response.length;
             for (var i=0;i<response.length -1; i++){
               var curFriend = response[i];
               $scope.friends[curFriend.uid] = {
@@ -171,9 +173,12 @@ app.controller('authenticationCtrl', [
             }
             
             // Find Friend's likes
+            var index = 1;
             for (var key in $scope.friends) {
              setMusicData(key);
+             $scope.percentDone = (100*index++)/$scope.numFriends;
            }
+           $scope.top10Calculated = true;
 
          });
         });
