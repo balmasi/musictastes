@@ -3,7 +3,7 @@
     <div class="col-lg-8 col-lg-offset-2">
 
       <div class="page-header">
-      <h1>Hello ngFacebook! <small><a href="http://www.facebook.com/luiscarlosjayk" target="_blank">by Borna</a></small> </h1>  
+      <h1>Music Tastes <small><a href="http://www.facebook.com/balmasi" target="_blank">by Borna</a></small> </h1>  
       </div>
 
       <div>
@@ -13,9 +13,19 @@
 
       <button type="button" class="btn btn-primary btn-large" data-ng-show="!logged" data-ng-disabled="!facebookReady" data-ng-click="IntentLogin()">Login with Facebook</button>
       <button type="button" class="btn btn-danger btn-large" data-ng-show="logged" data-ng-disabled="!facebookReady" data-ng-click="logout()">Logout</button>
+       <button type="button" class="btn btn-large" data-ng-show="logged" data-ng-disabled="!facebookReady" data-ng-click="getFriendsLikes()">Get Friends</button>
 
       <div>
-        <debug val="user"></debug>
+        <ol>
+          <li ng-repeat="user in top10">
+            <h4><img src="{{user.friend_pic}}"/>{{user.friend_name}}</h4>
+            <ul>
+              <li ng-repeat="artist in user.common">
+                {{artist[1]}}
+              </li>
+            </ul>
+          </li>
+        </ol>
       </div>
 
     </div>
