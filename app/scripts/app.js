@@ -10,12 +10,12 @@ angular.module('musicTastesApp', [
 ])
   .config(['FacebookProvider', '$routeProvider' ,function (FacebookProvider, $routeProvider) {
     $routeProvider
+      // .when('/', {
+      //   templateUrl: 'views/main.html',
+      //   controller: 'MainCtrl'
+      // })
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/facebook/', {
-        templateUrl: 'views/facebook.html',
         controller: 'authenticationCtrl'
       })
       .otherwise({

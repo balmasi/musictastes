@@ -1,30 +1,18 @@
-<div class="header">
-  <ul class="nav nav-pills pull-right">
-    <li class="active"><a ng-href="#">Home</a></li>
-    <li><a ng-href="#">About</a></li>
-    <li><a ng-href="#">Contact</a></li>
-  </ul>
-  <h3 class="text-muted">music tastes</h3>
-</div>
-
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
+    <button type="button" class="btn btn-danger pull-right"
+            data-ng-show="auth.logged"
+            data-ng-disabled="!facebookReady"
+            data-ng-click="logout()">
+        Logout
+    </button>
+  <h2>Welcome to Music Tastes!</h2>
   <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
+    Before we get started, we need to analyze your Facebook friends' music likes.
   </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
-</div>
-
-<p class="text-muted">{{loggedIn}}</p>
-<div class="row">
-  <ul>
-    <li ng-repeat="item in awesomeThings">
-        {{item}}
-      </li>
-</ul>
-</div>
-
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
+    <button type="button" class="btn btn-lg btn-primary"
+            data-ng-hide="auth.logged"
+            data-ng-disabled="!facebookReady"
+            data-ng-click="login()">
+        Login with Facebook
+    </button>
 </div>
